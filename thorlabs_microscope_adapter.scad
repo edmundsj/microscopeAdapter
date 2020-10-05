@@ -1,7 +1,6 @@
-$fa=0.4;
+$fa=0.5;
 $fs=0.5;
-difference(){
-    union(){
+union(){
         translate(v=[-22.5, -22.5, 0]){
             cube(size=[45, 45, 8.9]);
         };

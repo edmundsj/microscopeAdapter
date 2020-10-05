@@ -36,5 +36,10 @@ cage_plate = cage_plate + microscope_cylinder - center_bore - \
         rod_holes[0] - rod_holes[1] - rod_holes[2] - rod_holes[3] - \
         inner_holes[0] - inner_holes[1] - inner_holes[2] - inner_holes[3]
 
+filename = 'thorlabs_microscope_adapter.scad'
+cage_plate.write(filename)
 
-cage_plate.write('thorlabs_microscope_adapter.scad')
+with open(filename, 'r+') as scad_file:
+    content = scad_file.read()
+    scad_file.seek(0, 0)
+    scad_file.write('$fa=0.5;\n$fs=0.5;\n')
