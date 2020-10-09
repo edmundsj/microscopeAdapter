@@ -2,14 +2,15 @@
 Creates a near-copy of the thorlabs CP33, modified for one side to mate to a 38mm microscope tube
 """
 import openpyscad as ops
+import os
 plate_width = 45
 plate_thickness = 8.9
 hole_pitch = 30
 hole_length = plate_thickness + 1
 hole_offset = 1
 rod_diameter = 6.1
-rod_hole_diameter = rod_diameter
-screw_hole_diameter = 2.5
+rod_hole_diameter = rod_diameter + 0.7 # The ultimaker print holes were ~0.6mm too small.
+screw_hole_diameter = 3.0
 wall_thickness = 3.0
 center_bore_od = 37.8
 protrusion_length = 15
@@ -36,10 +37,14 @@ cage_plate = cage_plate + microscope_cylinder - center_bore - \
         rod_holes[0] - rod_holes[1] - rod_holes[2] - rod_holes[3] - \
         inner_holes[0] - inner_holes[1] - inner_holes[2] - inner_holes[3]
 
-filename = 'thorlabs_microscope_adapter.scad'
-cage_plate.write(filename)
+filename = 'thorlabs_microscope_adapter'
+cage_plate.write(filename + '.scad')
 
-with open(filename, 'r+') as scad_file:
-    content = scad_file.read()
-    scad_file.seek(0, 0)
-    scad_file.write('$fa=0.5;\n$fs=0.5;\n')
+with open(filename + '.scad', 'r') as fn:
+    content = fn.read()
+
+with open(filename + '.scad', 'w') as fn:
+    fn.write('$fa=0.5;\n$fs=0.5;\n')
+    fn.write(content)
+
+os.system('/Applications/OpenSCAD.app/Contents/MacOS/OpenSCAD -o ' + filename + '.stl' + ' ' + filename + '.scad')

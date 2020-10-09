@@ -11,7 +11,9 @@ If you have not already, install the [openSCAD](http://www.openscad.org/) and [o
 
 ### Verify file, generate STL
 
-Once this is done, run the `thorlabs_cage_plate.py` script. This should generate the source file for openSCAD. Then, open openSCAD and load in the `thorlabs_microscope_adapter.scad` file. Verify the thing looks correct (rendering has a large number of edges), and build it by pressing `F6` (`fn -> F6` if on a mac), and then `File->Export` the STL file.
+Once this is done, run the `thorlabs_cage_plate.py` script. This should generate the source file for openSCAD and use the command line interface of openSCAD to create an .stl file. Verify that the .stl file looks OK, and you are good to go.
 
-Done!
 
+### Debugging
+
+The main issue you may run into is openSCAD not being on your path. If this is the case, you need to add openscad to your path or manually create the .stl file in openscad.
